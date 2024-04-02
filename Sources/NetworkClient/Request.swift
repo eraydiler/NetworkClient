@@ -72,7 +72,7 @@ extension JSONEncoder {
     }
 }
 
-public class Request: NetworkRequest {
+open class Request: NetworkRequest {
     public var scheme: String
     public var host: String
     public var path: String
