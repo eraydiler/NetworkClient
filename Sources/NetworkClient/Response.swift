@@ -7,13 +7,13 @@
 
 import Foundation
 
-protocol NetworkResponse {
+public protocol NetworkResponse {
     associatedtype T: Codable
     var payload: T { get }
     var data: Data { get }
 }
 
 public struct Response<T: Codable>: NetworkResponse {
-    let payload: T
-    let data: Data
+    public let payload: T
+    public let data: Data
 }

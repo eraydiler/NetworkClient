@@ -10,7 +10,7 @@ import Foundation
 public struct APIClient: NetworkClient {
     public let session: any NetworkSession
 
-    init(session: any NetworkSession = URLSession.shared) {
+    public init(session: any NetworkSession = URLSession.shared) {
         self.session = session
     }
 

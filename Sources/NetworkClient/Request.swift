@@ -18,7 +18,7 @@ public protocol NetworkRequest {
     var dateDecodingStrategy: JSONDecoder.DateDecodingStrategy { get set }
 }
 
-extension NetworkRequest {
+public extension NetworkRequest {
     static var encoder: JSONEncoder { .default }
 
     func dateDecodingStrategy(_ value: JSONDecoder.DateDecodingStrategy) -> Self {
@@ -65,24 +65,24 @@ extension NetworkRequest {
 }
     
 extension JSONEncoder {
-    static var `default`: JSONEncoder {
+    public static var `default`: JSONEncoder {
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
         return encoder
     }
 }
 
-class Request: NetworkRequest {
-    var scheme: String
-    var host: String
-    var path: String
-    var method: HttpMethod
-    var body: HttpBody?
-    var headers: HTTPHeaders
-    var keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy
-    var dateDecodingStrategy: JSONDecoder.DateDecodingStrategy
+public class Request: NetworkRequest {
+    public var scheme: String
+    public var host: String
+    public var path: String
+    public var method: HttpMethod
+    public var body: HttpBody?
+    public var headers: HTTPHeaders
+    public var keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy
+    public var dateDecodingStrategy: JSONDecoder.DateDecodingStrategy
 
-    init(path: String) {
+    public init(path: String) {
         self.path = path
         self.scheme = "https"
         self.host = ""

@@ -110,12 +110,12 @@ extension HTTPHeaders {
 }
 
 extension HTTPHeaders {
-    subscript(key: Key) -> Value? {
+    public subscript(key: Key) -> Value? {
         get { headers[key] }
         set { headers[key] = newValue }
     }
     
-    mutating func add(_ value: Value, for key: Key) {
+    public mutating func add(_ value: Value, for key: Key) {
         headers[key] = value
     }
 }

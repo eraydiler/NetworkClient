@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum NetworkError: Error {
+public enum NetworkError: Error {
     case unknown
     case invalidURL
     case invalidBody
@@ -18,7 +18,7 @@ enum NetworkError: Error {
     case network(Error)
 }
 
-extension NetworkError {
+public extension NetworkError {
     enum HTTPStatusCode: Int, LocalizedError {
         case ok = 200
         case created = 201
@@ -27,7 +27,7 @@ extension NetworkError {
         case notFound = 404
         case internalServerError = 500
 
-        var errorDescription: String? {
+        public var errorDescription: String? {
             switch self {
             case .ok, .created:
                 return "Request was successful"

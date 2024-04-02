@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol Payload: Codable { }
+public protocol Payload: Codable { }
 
-struct NoPayload: Payload { }
+public struct NoPayload: Payload { }
