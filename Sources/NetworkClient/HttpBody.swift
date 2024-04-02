@@ -7,4 +7,4 @@
 
 import Foundation
 
-typealias HttpBody = Encodable
+public typealias HttpBody = Encodable

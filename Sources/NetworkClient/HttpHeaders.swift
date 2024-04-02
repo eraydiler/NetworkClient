@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct HTTPHeaders {
-    typealias DictionaryType = [Key : Value]
+public struct HTTPHeaders {
+    public typealias DictionaryType = [Key : Value]
     private var headers = DictionaryType()
     
     var description: String {
@@ -22,24 +22,24 @@ struct HTTPHeaders {
 
 // https://www.swiftbysundell.com/articles/creating-custom-collections-in-swift/
 extension HTTPHeaders: Collection {
-    typealias Index = DictionaryType.Index
-    typealias Element = DictionaryType.Element
-    
-    var startIndex: Index { return headers.startIndex }
-    var endIndex: Index { return headers.endIndex }
-    
-    subscript(index: Index) -> Element {
+    public typealias Index = DictionaryType.Index
+    public typealias Element = DictionaryType.Element
+
+    public var startIndex: Index { return headers.startIndex }
+    public var endIndex: Index { return headers.endIndex }
+
+    public subscript(index: Index) -> Element {
         get { return headers[index] }
     }
     
-    func index(after i: Index) -> Index {
+    public func index(after i: Index) -> Index {
         return headers.index(after: i)
     }
 }
 
 extension HTTPHeaders {
     public enum Key: Hashable, RawRepresentable {
-        typealias RawValue = String
+        public typealias RawValue = String
 
         case accept
         case acceptEncoding
@@ -49,7 +49,7 @@ extension HTTPHeaders {
         case contentLength
         case other(String)
         
-        init?(rawValue: String) {
+        public init?(rawValue: String) {
             switch rawValue {
             case "Accept":
                 self = .accept
@@ -68,7 +68,7 @@ extension HTTPHeaders {
             }
         }
         
-        var rawValue: String {
+        public var rawValue: String {
             switch self {
             case .accept:
                 return "Accept"
@@ -88,11 +88,11 @@ extension HTTPHeaders {
         }
     }
     
-    typealias Value = String
+    public typealias Value = String
 }
 
 extension HTTPHeaders: ExpressibleByDictionaryLiteral {
-    init(dictionaryLiteral elements: (Key, Value)...) {
+    public init(dictionaryLiteral elements: (Key, Value)...) {
         for (key, value) in elements {
             headers[key] = value
         }

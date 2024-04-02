@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol NetworkRequest {
+public protocol NetworkRequest {
     var scheme: String { get set }
     var host: String { get set }
     var path: String { get set }

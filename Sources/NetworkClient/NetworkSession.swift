@@ -8,14 +8,14 @@
 import Foundation
 import os
 
-protocol NetworkSession {
+public protocol NetworkSession {
     func data(from: URL) async throws -> Data
     func data(from request: NetworkRequest) async throws -> Data
     func bytes(for request: NetworkRequest) async throws -> URLSession.AsyncBytes
 }
 
 extension URLSession: NetworkSession {
-    func data(from url: URL) async throws -> Data {
+    public func data(from url: URL) async throws -> Data {
         do {
             let (data, response) = try await self.data(from: url, delegate: nil)
             try verifyResponse(response)
@@ -27,7 +27,7 @@ extension URLSession: NetworkSession {
         }
     }
 
-    func data(from request: any NetworkRequest) async throws -> Data {
+    public func data(from request: any NetworkRequest) async throws -> Data {
         do {
             let urlRequest = try generateUrlRequest(from: request)
             let (data, response) = try await self.data(for: urlRequest, delegate: nil)
@@ -40,7 +40,7 @@ extension URLSession: NetworkSession {
         }
     }
 
-    func bytes(for request: NetworkRequest) async throws -> URLSession.AsyncBytes {
+    public func bytes(for request: NetworkRequest) async throws -> URLSession.AsyncBytes {
         do {
             let urlRequest = try generateUrlRequest(from: request)
             let (result, response) = try await self.bytes(for: urlRequest)

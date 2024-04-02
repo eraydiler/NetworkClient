@@ -7,27 +7,27 @@
 
 import Foundation
 
-struct APIClient: NetworkClient {
-    let session: any NetworkSession
+public struct APIClient: NetworkClient {
+    public let session: any NetworkSession
 
     init(session: any NetworkSession = URLSession.shared) {
         self.session = session
     }
 
     @discardableResult
-    func make(_ request: any NetworkRequest) async throws -> Data {
+    public func make(_ request: any NetworkRequest) async throws -> Data {
         let response: Response<NoPayload> = try await make(request)
         return response.data
     }
 
     @discardableResult
-    func make<T: Codable>(_ request: any NetworkRequest) async throws -> T {
+    public func make<T: Codable>(_ request: any NetworkRequest) async throws -> T {
         let response: Response<T> = try await make(request)
         return response.payload
     }
 
     @discardableResult
-    func make<T: Codable>(_ request: any NetworkRequest) async throws -> Response<T> {
+    public func make<T: Codable>(_ request: any NetworkRequest) async throws -> Response<T> {
         let data: Data
 
         do {
@@ -44,7 +44,7 @@ struct APIClient: NetworkClient {
         }
     }
 
-    func getBytes(for request: NetworkRequest) async throws -> URLSession.AsyncBytes {
+    public func getBytes(for request: NetworkRequest) async throws -> URLSession.AsyncBytes {
         return try await session.bytes(for: request)
     }
 }

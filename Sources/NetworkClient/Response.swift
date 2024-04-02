@@ -13,7 +13,7 @@ protocol NetworkResponse {
     var data: Data { get }
 }
 
-struct Response<T: Codable>: NetworkResponse {
+public struct Response<T: Codable>: NetworkResponse {
     let payload: T
     let data: Data
 }

@@ -3,7 +3,7 @@
 
 import Foundation
 
-protocol NetworkClient {
+public protocol NetworkClient {
     var session: any NetworkSession { get }
 
     func make(_ request: NetworkRequest) async throws -> Data
