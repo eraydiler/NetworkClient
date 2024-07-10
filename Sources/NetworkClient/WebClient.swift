@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct APIClient: NetworkClient {
+open class WebClient: NetworkClient {
     public let session: any NetworkSession
 
     public init(session: any NetworkSession = URLSession.shared) {

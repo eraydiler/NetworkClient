@@ -21,6 +21,42 @@ public protocol NetworkRequest {
 public extension NetworkRequest {
     static var encoder: JSONEncoder { .default }
 
+    func scheme(_ value: String) -> Self {
+        var newRequest = self
+        newRequest.scheme = value
+        return newRequest
+    }
+
+    func host(_ value: String) -> Self {
+        var newRequest = self
+        newRequest.host = value
+        return newRequest
+    }
+
+    func path(_ value: String) -> Self {
+        var newRequest = self
+        newRequest.path = value
+        return newRequest
+    }
+
+    func method(_ value: HttpMethod) -> Self {
+        var newRequest = self
+        newRequest.method = value
+        return newRequest
+    }
+
+    func body(_ value: HttpBody) -> Self {
+        var newRequest = self
+        newRequest.body = value
+        return newRequest
+    }
+
+    func headers(_ value: HTTPHeaders) -> Self {
+        var newRequest = self
+        newRequest.headers = value
+        return newRequest
+    }
+
     func dateDecodingStrategy(_ value: JSONDecoder.DateDecodingStrategy) -> Self {
         var newRequest = self
         newRequest.dateDecodingStrategy = value
@@ -31,37 +67,7 @@ public extension NetworkRequest {
         var newRequest = self
         newRequest.keyDecodingStrategy = value
         return newRequest
-     }
-
-    func body(_ value: HttpBody) -> Self {
-        var newRequest = self
-        newRequest.body = value
-        return newRequest
-     }
-
-    func host(_ value: String) -> Self {
-        var newRequest = self
-        newRequest.host = value
-        return newRequest
-     }
-
-    func scheme(_ value: String) -> Self {
-        var newRequest = self
-        newRequest.scheme = value
-        return newRequest
-     }
-
-    func method(_ value: HttpMethod) -> Self {
-        var newRequest = self
-        newRequest.method = value
-        return newRequest
-     }
-
-    func headers(_ value: HTTPHeaders) -> Self {
-        var newRequest = self
-        newRequest.headers = value
-        return newRequest
-     }
+    }
 }
     
 extension JSONEncoder {
@@ -72,23 +78,15 @@ extension JSONEncoder {
     }
 }
 
-open class Request: NetworkRequest {
-    public var scheme: String
-    public var host: String
-    public var path: String
-    public var method: HttpMethod
+open class WebRequest: NetworkRequest {
+    public var scheme: String = "https"
+    public var host: String = ""
+    public var path: String = ""
+    public var method: HttpMethod = .get
     public var body: HttpBody?
-    public var headers: HTTPHeaders
-    public var keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy
-    public var dateDecodingStrategy: JSONDecoder.DateDecodingStrategy
-
-    public init(path: String) {
-        self.path = path
-        self.scheme = "https"
-        self.host = ""
-        self.method = .get
-        self.headers = HTTPHeaders.default
-        self.keyDecodingStrategy = .convertFromSnakeCase
-        self.dateDecodingStrategy = .secondsSince1970
-    }
+    public var headers: HTTPHeaders = .default
+    public var keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy = .convertFromSnakeCase
+    public var dateDecodingStrategy: JSONDecoder.DateDecodingStrategy = .secondsSince1970
+    
+    public init() { }
 }
