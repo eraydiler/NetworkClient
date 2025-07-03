@@ -3,7 +3,7 @@
 
 import Foundation
 
-public protocol NetworkClient {
+public protocol NetworkClient: Sendable {
     var session: any NetworkSession { get }
 
     func make(_ request: any NetworkRequest) async throws -> Data
